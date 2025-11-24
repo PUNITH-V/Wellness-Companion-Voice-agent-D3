@@ -1,0 +1,250 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.75rem;
+  /* Soft sage green and warm beige palette */
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --popover: #ffffff;
+  --popover-foreground: #1c1917;
+  --primary: #84a98c;
+  --primary-foreground: #ffffff;
+  --secondary: #cad2c5;
+  --secondary-foreground: #1c1917;
+  --muted: #f5f5f4;
+  --muted-foreground: #78716c;
+  --accent: #52796f;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --border: #e7e5e4;
+  --input: #e7e5e4;
+  --ring: #84a98c;
+}
+
+.dark {
+  /* Deep forest and moonlight palette */
+  --background: #0f1419;
+  --foreground: #f5f5f4;
+  --card: #1a1f26;
+  --card-foreground: #f5f5f4;
+  --popover: #1a1f26;
+  --popover-foreground: #f5f5f4;
+  --primary: #a8c5b8;
+  --primary-foreground: #0f1419;
+  --secondary: #354f52;
+  --secondary-foreground: #f5f5f4;
+  --muted: #1f2937;
+  --muted-foreground: #9ca3af;
+  --accent: #6b9080;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #2d3748;
+  --input: #2d3748;
+  --ring: #a8c5b8;
+}
+
+@theme inline {
+  --font-sans:
+    var(--font-public-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
+    var(--font-commit-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground relative;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: 
+      linear-gradient(30deg, transparent 48%, rgba(132, 169, 140, 0.03) 49%, rgba(132, 169, 140, 0.03) 51%, transparent 52%),
+      linear-gradient(60deg, transparent 48%, rgba(82, 121, 111, 0.02) 49%, rgba(82, 121, 111, 0.02) 51%, transparent 52%),
+      linear-gradient(90deg, transparent 48%, rgba(202, 210, 197, 0.02) 49%, rgba(202, 210, 197, 0.02) 51%, transparent 52%);
+    background-size: 80px 80px, 120px 120px, 100px 100px;
+    background-position: 0 0, 40px 40px, 20px 20px;
+    animation: pattern-move 60s linear infinite;
+  }
+  
+  .dark body::before {
+    opacity: 0.15;
+    background-image: 
+      linear-gradient(30deg, transparent 48%, rgba(168, 197, 184, 0.04) 49%, rgba(168, 197, 184, 0.04) 51%, transparent 52%),
+      linear-gradient(60deg, transparent 48%, rgba(107, 144, 128, 0.03) 49%, rgba(107, 144, 128, 0.03) 51%, transparent 52%),
+      linear-gradient(90deg, transparent 48%, rgba(53, 79, 82, 0.03) 49%, rgba(53, 79, 82, 0.03) 51%, transparent 52%);
+  }
+  
+  @keyframes pattern-move {
+    0% {
+      background-position: 0 0, 40px 40px, 20px 20px;
+    }
+    100% {
+      background-position: 80px 80px, 120px 120px, 100px 100px;
+    }
+  }
+}
+
+@layer utils {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+  
+  .dark .glass-card {
+    background: rgba(26, 31, 38, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+  
+  .soft-shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+  
+  .dark .soft-shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .animate-text-shimmer {
+    animation-delay: 0.5s;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-name: text-shimmer;
+    background: var(--muted-foreground)
+      gradient(
+        linear,
+        100% 0,
+        0 0,
+        from(var(--muted-foreground)),
+        color-stop(0.5, var(--secondary-foreground)),
+        to(var(--muted-foreground))
+      );
+    background: var(--muted-foreground) -webkit-gradient(
+        linear,
+        100% 0,
+        0 0,
+        from(var(--muted-foreground)),
+        color-stop(0.5, var(--secondary-foreground)),
+        to(var(--muted-foreground))
+      );
+    background-repeat: no-repeat;
+    background-size: 50% 200%;
+    display: inline-block;
+  }
+
+  @keyframes text-shimmer {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 250% 0;
+    }
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+  
+  .animated-bg {
+    position: relative;
+  }
+  
+  .animated-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(132, 169, 140, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(82, 121, 111, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(202, 210, 197, 0.08) 0%, transparent 50%);
+    animation: gradient-float 20s ease-in-out infinite;
+  }
+  
+  .dark .animated-bg::after {
+    opacity: 0.3;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(168, 197, 184, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(107, 144, 128, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(53, 79, 82, 0.1) 0%, transparent 50%);
+  }
+  
+  @keyframes gradient-float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+      transform: translate(-30px, 30px) scale(0.9);
+    }
+  }
+}
